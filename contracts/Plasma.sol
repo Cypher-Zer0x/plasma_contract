@@ -1,10 +1,13 @@
 // SPDX-License-Identifier: UNLICENSED
 //@author : Cypher Lab Team - Cypher Zer0x
-pragma solidity ^0.8.9;
+pragma solidity 0.8.16;
 
 import "./IRiscZeroVerifier.sol";
+import {PrimitiveTypeUtils} from "@iden3/contracts/lib/PrimitiveTypeUtils.sol";
+import {ICircuitValidator} from "@iden3/contracts/interfaces/ICircuitValidator.sol";
+import {ZKPVerifier} from "@iden3/contracts/verifiers/ZKPVerifier.sol";
 
-contract Plasma {
+contract Plasma is ZKPVerifier {
     // ##### Constants
     /**
      * @notice The time after which a deposit can be exited
@@ -25,6 +28,11 @@ contract Plasma {
      * @dev deployed on Sepolia testnet
     */
     IRiscZeroVerifier RISC_ZERO_GROTH_16_VERIFIER = IRiscZeroVerifier(0x83C2e9CD64B2A16D3908E94C7654f3864212E2F8);
+
+    // ######### Polygon ID
+    uint64 public constant TRANSFER_REQUEST_ID = 1;
+    mapping(uint256 => address) public idToAddress;
+    mapping(address => uint256) public addressToId;
 
     // ##### State variables
     /**
@@ -170,6 +178,10 @@ contract Plasma {
         string calldata _pubKey,
         string calldata _rG 
         ) public payable returns (uint256 blockNumber) {
+        require(
+            proofs[msg.sender][TRANSFER_REQUEST_ID] == true,
+            "only identities who provided proof are allowed to deposit"
+        );
         if (msg.value == 0) {
             revert("Deposit amount must be greater than 0");
         }
@@ -227,7 +239,10 @@ contract Plasma {
      * @param _exitIds is the array of exit ids
      */
     function claimExits(uint256[] memory _exitIds) public {
-
+        require(
+            proofs[msg.sender][TRANSFER_REQUEST_ID] == true,
+            "only identities who provided proof are allowed to claim tokens"
+        );
         for (uint256 i = 0; i < _exitIds.length; i++) {
             // check if msg.sender is the owner of the exit
             bool exitIdFound = false;
@@ -301,5 +316,34 @@ contract Plasma {
         bool success = RISC_ZERO_GROTH_16_VERIFIER.verify(seal, imageId, postStateDigest, journalDigest);
         require(success, "Proof is not valid");
         emit ProofPublished(msg.sender, seal, imageId, postStateDigest, journalDigest);
+    }
+
+    // ##### Polygon ID functions
+
+    function _beforeProofSubmit(
+        uint64 /* requestId */,
+        uint256[] memory inputs,
+        ICircuitValidator validator
+    ) internal view override {
+        // check that  challenge input is address of sender
+        address addr = PrimitiveTypeUtils.int256ToAddress(
+            inputs[validator.inputIndexOf("challenge")]
+        );
+        // this is linking between msg.sender and
+        require(
+            _msgSender() == addr,
+            "address in proof is not a sender address"
+        );
+    }
+
+    function _afterProofSubmit(
+        uint64 requestId,
+        uint256[] memory inputs,
+        ICircuitValidator validator
+    ) internal override {
+        require(
+            requestId == TRANSFER_REQUEST_ID && addressToId[_msgSender()] == 0,
+            "proof can not be submitted more than once"
+        );
     }
 }
