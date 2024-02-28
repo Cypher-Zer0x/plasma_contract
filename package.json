@@ -5,6 +5,11 @@
     "hardhat": "^2.20.1"
   },
   "dependencies": {
-    "@iden3/contracts": "^1.4.8"
+    "@0xpolygonid/js-sdk": "^1.8.1",
+    "@iden3/contracts": "^1.4.8",
+    "@iden3/js-crypto": "^1.0.3",
+    "@iden3/js-iden3-core": "^1.2.1",
+    "solidity-bytes-utils": "^0.8.0",
+    "web3": "^4.5.0"
   }
 }
