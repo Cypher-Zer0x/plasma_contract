@@ -67,16 +67,16 @@ function calculateQueryHash(values, schema, slotIndex, operator, claimPathKey, c
 
 async function main() {
   // you can run https://go.dev/play/p/3id7HAhf-Wi to get schema hash and claimPathKey using YOUR schema
-  const schemaBigInt = "309149146595522499691478297777846608351";
+  const schemaBigInt = "290636749650564881057128140786927307872";
 
   const type = "KYC";
   const schemaUrl =
-    "ipfs://QmNpGVKdQbzMe4aB7XEKn6ET9FzEYpN2YfEFneFstvugKQ";
+    "ipfs://QmTukqnmfZFjwwro74VfWEFJkzMfF4CyxBioStG21HCHYs"; //LD
   // merklized path to field in the W3C credential according to JSONLD  schema e.g. birthday in the KYCAgeCredential under the url "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld"
   const schemaClaimPathKey =
-    "dfe13340bdb5161b2e0d3a1bbaf593e8"; // Pas sur /!\
+    "12384651933739824878484180207049897147014501621991411943535905692793420414553"; // Pas sur /!\
 
-  const requestId = 1709268585;
+  const requestId = 1;
 
   const query = {
     requestId,
@@ -84,7 +84,7 @@ async function main() {
     claimPathKey: schemaClaimPathKey,
     operator: Operators.EQ,
     slotIndex: 0,
-    value: [true, ...new Array(63).fill(0)], // for operators 1-3 only first value matters
+    value: [1, ...new Array(63).fill(0)], // for operators 1-3 only first value matters
     circuitIds: ["credentialAtomicQuerySigV2OnChain"],
     skipClaimRevocationCheck: false,
     claimPathNotExists: 0,
@@ -100,7 +100,7 @@ async function main() {
   ).toString();
 
   // add the address of the contract just deployed
-  const PLASMAVerifierAddress = "0xcEf87B41132728199549fe6F114521aCE64aff65";
+  const PLASMAVerifierAddress = "0x03b23ABc13242815358Ab1bdC89B6dc105f52efC";
 
   let plasmaVerifier = await hre.ethers.getContractAt("Plasma", PLASMAVerifierAddress);
 
