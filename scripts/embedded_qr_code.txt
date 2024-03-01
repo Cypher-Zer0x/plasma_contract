@@ -1,69 +1,70 @@
-// KYCAgeCredential : https://issuer-ui.polygonid.me/credentials/scan-link/32fa5c8c-8ae7-44ea-9813-ee6e14c50d45
-// import React from "react";
-// import { render } from "react-dom";
-// import { QRCode } from "react-qr-svg";
+https://schema-builder.polygonid.me/schemas/a6e7d67f-0f30-4d5b-b079-e9eff396af97
 
-// const styles = {
-//   root: {
-//     fontFamily: "sans-serif",
-//   },
-//   h1: {
-//     textAlign: "center",
-//   },
-//   qrcode: {
-//     textAlign: "center",
-//   },
-// };
+import React from "react";
+import { render } from "react-dom";
+import { QRCode } from "react-qr-svg";
 
-// export default class App extends React.Component {
-//   componentDidMount() {}
+const styles = {
+  root: {
+    fontFamily: "sans-serif",
+  },
+  h1: {
+    textAlign: "center",
+  },
+  qrcode: {
+    textAlign: "center",
+  },
+};
 
-//   render() {
-//     return (
-//       <div style={styles.root}>
-//         <h1 style={styles.h1}>QRCode with JSON</h1>
-//         <div style={styles.qrcode}>
-//           <QRCode
-//             level="Q"
-//             style={{ width: 256 }}
-//             value={JSON.stringify({
-//               id: "7f38a193-0918-4a48-9fac-36adfdb8b542",
-//               typ: "application/iden3comm-plain-json",
-//               type: "https://iden3-communication.io/proofs/1.0/contract-invoke-request",
-//               thid: "7f38a193-0918-4a48-9fac-36adfdb8b542",
-//               body: {
-//                 reason: "KYCAgeCredential",
-//                 transaction_data: {
-//                   contract_address:
-//                     "0xCdD257bA2aA82d506e48F05477dcBaEE4F5c07dd",
-//                   method_id: "b68967e2",
-//                   chain_id: 80001,
-//                   network: "polygon-mumbai",
-//                 },
-//                 scope: [
-//                   {
-//                     id: 1,
-//                     circuitId: "credentialAtomicQuerySigV2OnChain",
-//                     query: {
-//                       allowedIssuers: ["*"],
-//                       context:
-//                         "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld",
-//                       credentialSubject: {
-//                         birthday: {
-//                           $lt: 20020101,
-//                         },
-//                       },
-//                       type: "KYCAgeCredential",
-//                     },
-//                   },
-//                 ],
-//               },
-//             })}
-//           />
-//         </div>
-//       </div>
-//     );
-//   }
-// }
+export default class App extends React.Component {
+  componentDidMount() {}
 
-// render(<App />, document.getElementById("root"));
+  render() {
+    return (
+      <div style={styles.root}>
+        <h1 style={styles.h1}>QRCode with JSON</h1>
+        <div style={styles.qrcode}>
+          <QRCode
+            level="Q"
+            style={{ width: 256 }}
+            value={JSON.stringify({
+              id: "7f38a193-0918-4a48-9fac-36adfdb8b542",
+              typ: "application/iden3comm-plain-json",
+              type: "https://iden3-communication.io/proofs/1.0/contract-invoke-request",
+              thid: "7f38a193-0918-4a48-9fac-36adfdb8b542",
+              body: {
+                reason: "KYCAgeCredential",
+                transaction_data: {
+                  contract_address:
+                    "0xCdD257bA2aA82d506e48F05477dcBaEE4F5c07dd",
+                  method_id: "b68967e2",
+                  chain_id: 80001,
+                  network: "polygon-mumbai",
+                },
+                scope: [
+                  {
+                    id: 1709268585,
+                    circuitId: "credentialAtomicQuerySigV2OnChain",
+                    query: {
+                      allowedIssuers: ["*"],
+                      context:
+                        "ipfs://QmNpGVKdQbzMe4aB7XEKn6ET9FzEYpN2YfEFneFstvugKQ",
+                      credentialSubject: {
+                        harpiecheck: {
+                          $eq: true,
+                        },
+                      },
+                      type: "KYC",
+                    },
+                  },
+                ],
+              },
+            })}
+          />
+        </div>
+      </div>
+    );
+  }
+}
+
+render(<App />, document.getElementById("root"));

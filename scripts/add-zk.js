@@ -67,24 +67,24 @@ function calculateQueryHash(values, schema, slotIndex, operator, claimPathKey, c
 
 async function main() {
   // you can run https://go.dev/play/p/3id7HAhf-Wi to get schema hash and claimPathKey using YOUR schema
-  const schemaBigInt = "74977327600848231385663280181476307657";
+  const schemaBigInt = "309149146595522499691478297777846608351";
 
-  const type = "KYCAgeCredential";
+  const type = "KYC";
   const schemaUrl =
-    "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld";
+    "ipfs://QmNpGVKdQbzMe4aB7XEKn6ET9FzEYpN2YfEFneFstvugKQ";
   // merklized path to field in the W3C credential according to JSONLD  schema e.g. birthday in the KYCAgeCredential under the url "https://raw.githubusercontent.com/iden3/claim-schema-vocab/main/schemas/json-ld/kyc-v3.json-ld"
   const schemaClaimPathKey =
-    "20376033832371109177683048456014525905119173674985843915445634726167450989630";
+    "dfe13340bdb5161b2e0d3a1bbaf593e8"; // Pas sur /!\
 
-  const requestId = 1;
+  const requestId = 1709268585;
 
   const query = {
     requestId,
     schema: schemaBigInt,
     claimPathKey: schemaClaimPathKey,
-    operator: Operators.LT,
+    operator: Operators.EQ,
     slotIndex: 0,
-    value: [20020101, ...new Array(63).fill(0)], // for operators 1-3 only first value matters
+    value: [true, ...new Array(63).fill(0)], // for operators 1-3 only first value matters
     circuitIds: ["credentialAtomicQuerySigV2OnChain"],
     skipClaimRevocationCheck: false,
     claimPathNotExists: 0,
@@ -100,7 +100,7 @@ async function main() {
   ).toString();
 
   // add the address of the contract just deployed
-  const PLASMAVerifierAddress = "0xCdD257bA2aA82d506e48F05477dcBaEE4F5c07dd";
+  const PLASMAVerifierAddress = "0xcEf87B41132728199549fe6F114521aCE64aff65";
 
   let plasmaVerifier = await hre.ethers.getContractAt("Plasma", PLASMAVerifierAddress);
 
@@ -113,7 +113,7 @@ async function main() {
     type: "https://iden3-communication.io/proofs/1.0/contract-invoke-request",
     thid: "7f38a193-0918-4a48-9fac-36adfdb8b542",
     body: {
-      reason: "KYCAgeCredential",
+      reason: "HarpieBackGroundCheck",
       transaction_data: {
         contract_address: PLASMAVerifierAddress,
         method_id: "b68967e2",
@@ -128,8 +128,8 @@ async function main() {
             allowedIssuers: ["*"],
             context: schemaUrl,
             credentialSubject: {
-              birthday: {
-                $lt: query.value[0],
+              harpiecheck: {
+                $eq: query.value[0],
               },
             },
             type,
