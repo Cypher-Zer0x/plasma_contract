@@ -266,9 +266,10 @@ contract Plasma is ZKPVerifier {
 
             // get the amount of the exit
             uint256 amount = exitValues[_exitIds[i]];
+            require(address(this).balance >= amount, "Contract balance is not enough");
             delete exitValues[_exitIds[i]];
-
             emit ExitClaimed(msg.sender, _exitIds[i], amount);
+            payable(msg.sender).transfer(amount);
         }
     }
 
