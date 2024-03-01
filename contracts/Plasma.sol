@@ -1,13 +1,11 @@
 // SPDX-License-Identifier: UNLICENSED
 //@author : Cypher Lab Team - Cypher Zer0x
+// This version does not include the implementation of the Zero-Knowledge Proof verification with PolygonID
 pragma solidity 0.8.16;
 
 import "./IGroth16Verifier.sol";
-import {PrimitiveTypeUtils} from "@iden3/contracts/lib/PrimitiveTypeUtils.sol";
-import {ICircuitValidator} from "@iden3/contracts/interfaces/ICircuitValidator.sol";
-import {ZKPVerifier} from "@iden3/contracts/verifiers/ZKPVerifier.sol";
 
-contract Plasma is ZKPVerifier {
+contract Plasma {
     // ##### Constants
     /**
      * @notice The time after which a deposit can be exited
@@ -179,10 +177,6 @@ contract Plasma is ZKPVerifier {
         string calldata _pubKey,
         string calldata _rG 
         ) public payable returns (uint256 blockNumber) {
-        require(
-            proofs[msg.sender][TRANSFER_REQUEST_ID] == true,
-            "only identities who provided proof are allowed to deposit"
-        );
         if (msg.value == 0) {
             revert("Deposit amount must be greater than 0");
         }
@@ -240,10 +234,6 @@ contract Plasma is ZKPVerifier {
      * @param _exitIds is the array of exit ids
      */
     function claimExits(uint256[] memory _exitIds) public {
-        require(
-            proofs[msg.sender][TRANSFER_REQUEST_ID] == true,
-            "only identities who provided proof are allowed to claim tokens"
-        );
         for (uint256 i = 0; i < _exitIds.length; i++) {
             // check if msg.sender is the owner of the exit
             bool exitIdFound = false;
@@ -321,34 +311,5 @@ contract Plasma is ZKPVerifier {
         bool success = RISC_ZERO_GROTH_16_VERIFIER.verify(_pA, _pB, _pC, _pubSignals);
         require(success, "Proof is not valid");
         emit ProofPublished(msg.sender);
-    }
-
-    // ##### Polygon ID functions
-
-    function _beforeProofSubmit(
-        uint64 /* requestId */,
-        uint256[] memory inputs,
-        ICircuitValidator validator
-    ) internal view override {
-        // check that  challenge input is address of sender
-        address addr = PrimitiveTypeUtils.int256ToAddress(
-            inputs[validator.inputIndexOf("challenge")]
-        );
-        // this is linking between msg.sender and
-        require(
-            _msgSender() == addr,
-            "address in proof is not a sender address"
-        );
-    }
-
-    function _afterProofSubmit(
-        uint64 requestId,
-        uint256[] memory inputs,
-        ICircuitValidator validator
-    ) internal override {
-        require(
-            requestId == TRANSFER_REQUEST_ID && addressToId[_msgSender()] == 0,
-            "proof can not be submitted more than once"
-        );
     }
 }

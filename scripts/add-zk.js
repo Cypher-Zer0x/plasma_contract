@@ -99,7 +99,7 @@ async function main() {
     query.claimPathNotExists
   ).toString();
 
-  // add the address of the contract just deployed
+  // add the address of the contract PlasmaPolygon just deployed
   const PLASMAVerifierAddress = "0xE6171162960A9656692EE53Bf30E4111bB092Da3";
 
   let plasmaVerifier = await hre.ethers.getContractAt("Plasma", PLASMAVerifierAddress);
