@@ -1,7 +1,10 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const plasma = await ethers.deployContract("PlasmaPolygon", []);
+  const groth16Verifier = await ethers.deployContract("Groth16Verifier", []);
+  await groth16Verifier.waitForDeployment();
+  console.log("Groth16Verifier contract deployed to:", groth16Verifier.target);
+  const plasma = await ethers.deployContract("PlasmaPolygon", [groth16Verifier.target]);
   await plasma.waitForDeployment();
   console.log("Plasma contract deployed to:", plasma.target);
   
