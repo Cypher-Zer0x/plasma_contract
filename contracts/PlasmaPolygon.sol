@@ -17,7 +17,7 @@ contract PlasmaPolygon is ZKPVerifier {
     /**
      * @notice The amount of stake required to become a validator
      */
-    uint256 public constant STAKE_AMOUNT = 1 ether;
+    uint256 public constant STAKE_AMOUNT = 100 wei;
     /**
      * @notice The id of the next exit
      */
@@ -30,6 +30,7 @@ contract PlasmaPolygon is ZKPVerifier {
     */
     IGroth16Verifier public RISC_ZERO_GROTH_16_VERIFIER; 
     // ######### Polygon ID
+    bytes32 public lastProofDigest; 
     uint64 public constant TRANSFER_REQUEST_ID = 1;
     mapping(uint256 => address) public idToAddress;
     mapping(address => uint256) public addressToId;
@@ -144,7 +145,8 @@ contract PlasmaPolygon is ZKPVerifier {
      * @dev The journalDigest is the digest of the journal
      */
     event ProofPublished(
-        address publisher
+        address publisher, 
+        bytes32 proofDigest
     );
 
     // ##### Modifiers
@@ -321,7 +323,11 @@ contract PlasmaPolygon is ZKPVerifier {
         uint256[4] calldata _pubSignals) public onlyValidator {
         bool success = RISC_ZERO_GROTH_16_VERIFIER.verify(_pA, _pB, _pC, _pubSignals);
         require(success, "Proof is not valid");
-        emit ProofPublished(msg.sender);
+        // Hash the inputs using keccak256
+        bytes32 inputsHash = keccak256(abi.encode(_pA, _pB, _pC, _pubSignals));
+        lastProofDigest = inputsHash;
+        // Emit an event with the hash of the inputs
+        emit ProofPublished(msg.sender, inputsHash);
     }
 
     // ##### Polygon ID functions

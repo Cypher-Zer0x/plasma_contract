@@ -14,7 +14,7 @@ contract Plasma {
     /**
      * @notice The amount of stake required to become a validator
      */
-    uint256 public constant STAKE_AMOUNT = 1 ether;
+    uint256 public constant STAKE_AMOUNT = 100 wei;
     /**
      * @notice The id of the next exit
      */
@@ -28,6 +28,7 @@ contract Plasma {
    IGroth16Verifier public RISC_ZERO_GROTH_16_VERIFIER; 
     // ######### Polygon ID
     uint64 public constant TRANSFER_REQUEST_ID = 1;
+    bytes32 public lastProofDigest; 
     mapping(uint256 => address) public idToAddress;
     mapping(address => uint256) public addressToId;
 
@@ -141,7 +142,8 @@ contract Plasma {
      * @dev The journalDigest is the digest of the journal
      */
     event ProofPublished(
-        address publisher
+        address publisher,
+        bytes32 proofDigest
     );
 
     // ##### Modifiers
@@ -305,11 +307,18 @@ contract Plasma {
     * @dev The publishProof function requires a valid zero-knowledge proof
     */
     function publishProof(uint256[2] calldata _pA,
-        uint256[2][2] calldata _pB,
-        uint256[2] calldata _pC,
-        uint256[4] calldata _pubSignals) public onlyValidator {
-        bool success = RISC_ZERO_GROTH_16_VERIFIER.verify(_pA, _pB, _pC, _pubSignals);
-        require(success, "Proof is not valid");
-        emit ProofPublished(msg.sender);
+    uint256[2][2] calldata _pB,
+    uint256[2] calldata _pC,
+    uint256[4] calldata _pubSignals) public onlyValidator {
+    
+    // Verify the proof using the provided inputs
+    bool success = RISC_ZERO_GROTH_16_VERIFIER.verify(_pA, _pB, _pC, _pubSignals);
+    require(success, "Proof is not valid");
+    
+    // Hash the inputs using keccak256
+    bytes32 inputsHash = keccak256(abi.encode(_pA, _pB, _pC, _pubSignals));
+    lastProofDigest = inputsHash;
+    // Emit an event with the hash of the inputs
+    emit ProofPublished(msg.sender, inputsHash);
     }
 }
