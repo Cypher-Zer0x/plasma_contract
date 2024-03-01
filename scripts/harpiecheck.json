@@ -1,0 +1,1 @@
+{"@context":[{"@protected":true,"@version":1.1,"id":"@id","type":"@type","KYC":{"@context":{"@propagate":true,"@protected":true,"polygon-vocab":"urn:uuid:a0e6f0c3-18f4-4530-8c29-7a7cba83780a#","xsd":"http://www.w3.org/2001/XMLSchema#","harpiecheck":{"@id":"polygon-vocab:harpiecheck","@type":"xsd:double"}},"@id":"urn:uuid:28a1e67b-d3b3-4600-9ede-debbb8a74ab7"}}]}

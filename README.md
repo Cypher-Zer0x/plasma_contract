@@ -1,13 +1,18 @@
-# Sample Hardhat Project
-
-This project demonstrates a basic Hardhat use case. It comes with a sample contract, a test for that contract, and a script that deploys that contract.
-
-Try running some of the following tasks:
+# Commands
 
 ```shell
-npx hardhat help
-npx hardhat test
-REPORT_GAS=true npx hardhat test
-npx hardhat node
 npx hardhat run scripts/deploy.ts
+npx hardhat run scripts/add-zk.js
+```
+
+# Polygon ID - HarpieBackGroundCheck
+
+JSON schema URL
+ipfs://Qma4p6sPaAaChAPQxprJsEomki66Y2qZ3ymjotPNn1Pc5S
+
+JSON-LD Context
+ipfs://QmYhxQiXvZXSEXyDv2mxPyrA3cihWmpsd44DrFsLP1tz31
+
+```
+Polygon-mumbai : 0xE6171162960A9656692EE53Bf30E4111bB092Da3
 ```
