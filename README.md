@@ -60,3 +60,66 @@ Injective Testnet :
 ```
 Inco Gentry Testnet : 
 ```   
+# Faucet Resources for Blockchain Developers
+
+This document lists various faucet resources for developers and users to obtain testnet tokens for different blockchain networks. Faucets are crucial tools in blockchain development and testing, offering a way to receive free tokens or cryptocurrencies on testnets at no cost. These resources support a range of networks, facilitating testing and development across diverse blockchain ecosystems.
+
+## Aurora Network
+
+### [Aurora Faucet](https://aurora.dev/faucet)
+- *Network:* Aurora
+- *Description:* Offers testnet tokens for the Aurora network, enabling developers to test smart contracts and applications on Aurora's Ethereum-compatible environment.
+
+## LearnWeb3 Linea Goerli
+
+### [LearnWeb3 Linea Goerli Faucet](https://learnweb3.io/faucets/linea_goerli/)
+- *Network:* Goerli Testnet (Ethereum)
+- *Description:* Provides Goerli testnet ETH for developers experimenting on the Ethereum Goerli testnet, particularly useful for those learning through the LearnWeb3 platform.
+
+## Hedera Hashgraph
+
+### [Hedera Portal Faucet](https://portal.hedera.com/faucet)
+- *Network:* Hedera Hashgraph
+- *Description:* Supplies testnet HBAR for the Hedera Hashgraph network, facilitating the testing of applications on Hedera's fast, secure, and fair blockchain alternative.
+
+## Oasis Network
+
+### [Oasis Testnet Faucet](https://faucet.testnet.oasis.dev/)
+- *Network:* Oasis Network
+- *Description:* Offers tokens for the Oasis testnet, supporting developers in testing decentralized applications on the Oasis platform.
+
+## XDC Network
+
+### [XDC Network Faucet](https://faucet.blocksscan.io/)
+- *Network:* XDC Network
+- *Description:* Provides testnet XDC tokens, enabling developers to test applications on the XDC Network, a hybrid blockchain platform.
+
+## Inco Testnet (Placeholder)
+
+### [Inco Testnet Explorer](https://explorer.testnet.inco.org/)
+- *Network:* Inco Testnet
+- *Description:* The link provided seems to be for an explorer rather than a faucet. Please ensure to find the correct faucet link for Inco Testnet tokens.
+
+## Zircuit Bridge
+
+### [Zircuit Faucet](https://bridge.zircuit.com/)
+- *Network:* Zircuit Network
+- *Description:* While primarily a bridge, it may offer faucet capabilities for Zircuit or associated testnets. Check the site for details on accessing testnet tokens.
+
+## Moonbeam
+
+### [Moonbeam Faucet](https://faucet.moonbeam.network/)
+- *Network:* Moonbeam (Polkadot)
+- *Description:* Dispenses testnet tokens for the Moonbeam network, aiding in the development of Polkadot-compatible decentralized applications.
+
+## Alchemy Ethereum Sepolia
+
+### [Alchemy Ethereum Sepolia Faucet](https://www.alchemy.com/faucets/ethereum-sepolia)
+- *Network:* Ethereum Sepolia Testnet
+- *Description:* Provides Sepolia testnet ETH, supported by Alchemy, to facilitate development and testing on the Ethereum network's Sepolia testnet.
+
+## Alchemy Polygon Mumbai
+
+### [Alchemy Polygon Mumbai Faucet](https://www.alchemy.com/faucets/polygon-mumbai)
+- *Network:* Polygon Mumbai Testnet
+- *Description:* Offers Mumbai testnet MATIC tokens through Alchemy, supporting developers in deploying and testing applications on the Polygon network.
