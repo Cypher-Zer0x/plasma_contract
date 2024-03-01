@@ -2,7 +2,7 @@
 //@author : Cypher Lab Team - Cypher Zer0x
 pragma solidity 0.8.16;
 
-import "./IRiscZeroVerifier.sol";
+import "./IGroth16Verifier.sol";
 import {PrimitiveTypeUtils} from "@iden3/contracts/lib/PrimitiveTypeUtils.sol";
 import {ICircuitValidator} from "@iden3/contracts/interfaces/ICircuitValidator.sol";
 import {ZKPVerifier} from "@iden3/contracts/verifiers/ZKPVerifier.sol";
@@ -27,8 +27,7 @@ contract Plasma is ZKPVerifier {
      * @dev The RISC-ZERO verifier contract is used to verify the validity of the zero-knowledge proof
      * @dev deployed on Sepolia testnet
     */
-    IRiscZeroVerifier RISC_ZERO_GROTH_16_VERIFIER = IRiscZeroVerifier(0x83C2e9CD64B2A16D3908E94C7654f3864212E2F8);
-
+   IGroth16Verifier public RISC_ZERO_GROTH_16_VERIFIER; 
     // ######### Polygon ID
     uint64 public constant TRANSFER_REQUEST_ID = 1;
     mapping(uint256 => address) public idToAddress;
@@ -144,11 +143,7 @@ contract Plasma is ZKPVerifier {
      * @dev The journalDigest is the digest of the journal
      */
     event ProofPublished(
-        address publisher,
-        bytes seal,
-        bytes32 imageId,
-        bytes32 postStateDigest,
-        bytes32 journalDigest
+        address publisher
     );
 
     // ##### Modifiers
@@ -161,6 +156,12 @@ contract Plasma is ZKPVerifier {
             "Only validator can call this function"
         );
         _;
+    }
+
+    // ##### Constructor
+    constructor(address verifier) {
+        // the Groth16Verifier contract
+        RISC_ZERO_GROTH_16_VERIFIER = IGroth16Verifier(verifier);
     }
 
     // ##### Functions
@@ -313,10 +314,13 @@ contract Plasma is ZKPVerifier {
     * @dev The publishProof function emits a ProofPublished event
     * @dev The publishProof function requires a valid zero-knowledge proof
     */
-    function publishProof(bytes calldata seal, bytes32 imageId, bytes32 postStateDigest, bytes32 journalDigest) public onlyValidator {
-        bool success = RISC_ZERO_GROTH_16_VERIFIER.verify(seal, imageId, postStateDigest, journalDigest);
+    function publishProof(uint256[2] calldata _pA,
+        uint256[2][2] calldata _pB,
+        uint256[2] calldata _pC,
+        uint256[4] calldata _pubSignals) public onlyValidator {
+        bool success = RISC_ZERO_GROTH_16_VERIFIER.verify(_pA, _pB, _pC, _pubSignals);
         require(success, "Proof is not valid");
-        emit ProofPublished(msg.sender, seal, imageId, postStateDigest, journalDigest);
+        emit ProofPublished(msg.sender);
     }
 
     // ##### Polygon ID functions
