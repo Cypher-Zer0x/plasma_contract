@@ -162,6 +162,7 @@ contract Plasma {
     constructor(address verifier) {
         // the Groth16Verifier contract
         RISC_ZERO_GROTH_16_VERIFIER = IGroth16Verifier(verifier);
+        isValidator[msg.sender] = true;
     }
 
     // ##### Functions
