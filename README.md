@@ -25,41 +25,33 @@ JSON-LD Context
 ipfs://QmYhxQiXvZXSEXyDv2mxPyrA3cihWmpsd44DrFsLP1tz31
 
 ```
-Polygon-mumbai : 0xE6171162960A9656692EE53Bf30E4111bB092Da3
+Polygon-mumbai : 0xF43a5fCa550a8b04252ADd7520caEd8dde85e449
 ```
 
 # Plasma -  with RISC ZERO & no KYC
 
 ```
-Sepolia : 
+Sepolia : 0xF43a5fCa550a8b04252ADd7520caEd8dde85e449
 ```  
 ```
-Linea Goerli Testnet : 
+Linea Goerli Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
 ```  
 ```
-Aurora Testnet : 
+Aurora Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
 ```  
 ```
-Apothem Network : 
+Apothem Network : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
 ```  
 ```
-Oasis Testnet : 
+Oasis Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
 ```   
 ```
-Hedera Testnet : 
+Hedera Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
 ```  
 ```
-Moonbase Alpha : 
+Zircuit Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
 ```  
-```
-Zircuit Testnet : 
-```  
-```
-Injective Testnet : 
-```  
-```
-Inco Gentry Testnet : 
-```   
+  
 # Faucet Resources for Blockchain Developers
 
 This document lists various faucet resources for developers and users to obtain testnet tokens for different blockchain networks. Faucets are crucial tools in blockchain development and testing, offering a way to receive free tokens or cryptocurrencies on testnets at no cost. These resources support a range of networks, facilitating testing and development across diverse blockchain ecosystems.
