@@ -100,9 +100,9 @@ async function main() {
   ).toString();
 
   // add the address of the contract PlasmaPolygon just deployed
-  const PLASMAVerifierAddress = "0xE6171162960A9656692EE53Bf30E4111bB092Da3";
+  const PLASMAVerifierAddress = "0xF43a5fCa550a8b04252ADd7520caEd8dde85e449";
 
-  let plasmaVerifier = await hre.ethers.getContractAt("Plasma", PLASMAVerifierAddress);
+  let plasmaVerifier = await hre.ethers.getContractAt("PlasmaPolygon", PLASMAVerifierAddress);
 
   const validatorAddress = "0x1E4a22540E293C0e5E8c33DAfd6f523889cFd878"; // sig validator
   // const validatorAddress = "0x0682fbaA2E4C478aD5d24d992069dba409766121"; // mtp validator

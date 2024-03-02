@@ -310,7 +310,7 @@ contract Plasma {
     function publishProof(uint256[2] calldata _pA,
     uint256[2][2] calldata _pB,
     uint256[2] calldata _pC,
-    uint256[4] calldata _pubSignals) public onlyValidator {
+    uint256[4] calldata _pubSignals) public  onlyValidator{
     
     // Verify the proof using the provided inputs
     bool success = RISC_ZERO_GROTH_16_VERIFIER.verify(_pA, _pB, _pC, _pubSignals);
