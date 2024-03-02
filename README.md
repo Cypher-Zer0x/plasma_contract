@@ -25,31 +25,31 @@ JSON-LD Context
 ipfs://QmYhxQiXvZXSEXyDv2mxPyrA3cihWmpsd44DrFsLP1tz31
 
 ```
-Polygon-mumbai : 0xF43a5fCa550a8b04252ADd7520caEd8dde85e449
+Polygon-mumbai : 0xcbe5f301853d365c0B311AB331f56AAC0d39d6b0
 ```
 
 # Plasma -  with RISC ZERO & no KYC
 
 ```
-Sepolia : 0xF43a5fCa550a8b04252ADd7520caEd8dde85e449
+Sepolia : 0x8DbDf7A6008531ED1fB301D4d61C0a883Ae0FA0b
 ```  
 ```
-Linea Goerli Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
+Linea Goerli Testnet : 0x991a0FAeE936aDDba6b444C48Ad1c8Ec04D9a208
 ```  
 ```
-Aurora Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
+Aurora Testnet : 0x991a0FAeE936aDDba6b444C48Ad1c8Ec04D9a208
 ```  
 ```
-Apothem Network : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
+Apothem Network : 0x991a0FAeE936aDDba6b444C48Ad1c8Ec04D9a208
 ```  
 ```
-Oasis Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
+Oasis Testnet : 0x991a0FAeE936aDDba6b444C48Ad1c8Ec04D9a208
 ```   
 ```
-Hedera Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
+Hedera Testnet : 0x991a0FAeE936aDDba6b444C48Ad1c8Ec04D9a208
 ```  
 ```
-Zircuit Testnet : 0xBFA33B098a0904e362eFf7850C63d30cbd2Ff797
+Zircuit Testnet : 0x991a0FAeE936aDDba6b444C48Ad1c8Ec04D9a208
 ```  
   
 # Faucet Resources for Blockchain Developers
